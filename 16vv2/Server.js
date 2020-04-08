@@ -1,19 +1,15 @@
-//Подключение http-модуля,
-//который поставляется вместе с Node.js и
-//реализация доступа к нему через переменную http
+varfs = require("fs");
 var http = require("http");
-//Подключение модуля для работы с файловой системой
-var fs = require("fs");
-//Создание http-сервера, использующего порт 8888
-http.createServer( function(request, response) {
+function start() {
+function onRequest(request, response) {
 console.log("Request received");
-//загрузкаhtmlстраницыизфайловойсистемы
 var page = fs.readFileSync('HelloWorld.html');
-//запись в ответ заголовка с указанием кода состояния, и типа возвращаемого контента
 response.writeHead(200, { 'Content-Type': 'text/html' });
-//телоответа
 response.write(page);
-//отправка ответа
+varparams = url.parse(request.url).search;
 response.end();
-}).listen(8888);
+ }
+http.createServer(onRequest).listen(8888);
 console.log("Server has started");
+}
+exports.start = start;

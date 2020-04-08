@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script>
+ document.addEventListener('click', function (event) 
+        {     
+            if (!event.target.matches('.click-me')) return;     
+            event.preventDefault(); 
+    // Создаём новый XMLHttpRequest-объект
+    let xhr = new XMLHttpRequest();
+    // Настраиваем его: GET-запрос по URL /article/.../load
+    xhr.open("POST", "http://localhost:8888/", true);
+    // Отсылаем запрос
+    xhr.send(document.getElementById("txt").value);
+    // Этот код сработает после того, как мы получим ответ сервера
+
+    xhr.onload = function() {
+  //if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+    //alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
+  //} else { // если всё прошло гладко, выводим результат
+   // alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+     console.log(xhr.response);
+     alert(JSON.parse(xhr.response).numberofcharacters);
+           };
+          }, false);
+
+</script>
+
+<body>
+Hello World!<br>
+<form action="C:/Users/allam/2/server.js" method="POST"></form>
+<p><input id="txt" type="text" maxlength="1000" size="40"></p>
+</form>
+<a class="click-me" id="2">Подсчитать</a>
+
+</body>
+</html>
