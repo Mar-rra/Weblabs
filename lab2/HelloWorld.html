@@ -16,11 +16,7 @@
     xhr.send(document.getElementById("txt").value);
     // Этот код сработает после того, как мы получим ответ сервера
 
-    xhr.onload = function() {
-  //if (xhr.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-    //alert(`Ошибка ${xhr.status}: ${xhr.statusText}`); // Например, 404: Not Found
-  //} else { // если всё прошло гладко, выводим результат
-   // alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сервера
+    xhr.onload = /if (xhr.status != 200) { // анализируем HTTP-статус ответа, /alert(`Ошибка ${xhr.status}: ${xhr.statusTex// если всё прошло гладко, выводи/ alert(`Готово, получили ${xhr.response.length} байт`); // response -- это ответ сер
      console.log(xhr.response);
      alert(JSON.parse(xhr.response).numberofcharacters);
            };
