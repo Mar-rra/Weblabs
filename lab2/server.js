@@ -1,7 +1,3 @@
-
-
-
-
 const fs = require("fs");
 const url = require('url');
 const http = require('http');
@@ -12,11 +8,9 @@ var server = http.createServer(
     function (request, response) {
         console.log("Request received");
         if (request.method === 'POST') {
-            console.log("POST");
             let body = '';
             request.on('data', function (data) {
-                var count=body.length;
-                    body += data;
+               body += data;
                 });
                 
                 request.on('end',function() {
@@ -30,15 +24,21 @@ var server = http.createServer(
                     response.end();
                 });
         }
-        if (request.method === 'GET') {
-            var params = url.parse(request.url);
-            console.log("Returned HTML file");
-            console.log(params);
+
+        if (request.method === 'GET'){
+            //var params = url.parse(request.url);
+            console.log("Request received");
+            //console.log(params);
+            //загрузка html страницы из файловой системы
             const page = fs.readFileSync(path.resolve(__dirname, 'HelloWorld.html'));
+            //запись в ответ заголовка с указанием кода состояния, и типа возвращаемого контента
             response.writeHead(200, { 'Content-Type': 'text/html' });
+            //телоответа
             response.write(page);
+            //отправка ответа
             response.end();
         }
+        
     }
 );
 
