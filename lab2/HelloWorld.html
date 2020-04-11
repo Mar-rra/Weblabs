@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script>
+ document.addEventListener('dblclick', () => //двойной клик
+        {     
+            if (!event.target.matches('.link')) return;     
+            event.preventDefault(); 
+    let url = new URL('http://localhost:8888/');
+    // Создаём новый XMLHttpRequest-объект
+    let xhr = new XMLHttpRequest();
+    // Инициализировать его.
+    xhr.open('POST', url);
+    // Отсылаем запрос
+    xhr.send(document.getElementById("txt").value);
+    // Этот код сработает после того, как мы получим ответ сервера
+    xhr.onerror = function() 
+    {
+       // происходит, только когда запрос совсем не получилось выполнить
+         alert(`Ошибка соединения`);
+    };
+    xhr.onload = function() {
+     console.log(xhr.response);
+     alert(JSON.parse(xhr.response).numberofcharacters);
+           };
+          });
+
+</script>
+<body>
+Hello World!<br>
+<form action="C:/Users/allam/2/server.js" method="POST"></form>
+<p><input id="txt" type="text" maxlength="1000" size="40"></p>
+</form>
+<a class="link" id="2">Подсчитать</a>
+
+</body>
+</html>
