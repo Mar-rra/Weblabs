@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+    <body onload="onload()"><br>
+        <h2><font color="SandyBrown">Hello World!</font><h2>
+        <input type="text" id="txt" type="text" placeholder=" " size="40"></input><br>  
+        <a ondblclick="countFunc()">Подсчитать</a>
+    </body>
+
+    <script>
+        var textValue;
+        function onload()
+        {
+            textValue = document.getElementById('txt');
+        }
+        function countFunc()
+        {
+            var x = textValue.value;
+            var count = x.match(/\S/ug); //любой символ кроме пробела, во 2 отчете с пробелами
+            var message;
+            if (!count)
+                message = "NO"; 
+            else
+                message = count.length;
+            alert("Количество символов:\n"+message);
+        }    
+</script>
+</html>
