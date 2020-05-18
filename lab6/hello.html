@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script>
+			let array = ["verblyud", "vol", "volk"];
+
+			async function check() {
+				var animalname = null;
+				var imgwidth = null;
+				var imgheight = null;
+				var imgcolor = null;
+
+				animalname = animal.value;
+				imgwidth = width.value;
+				imgheight = height.value;
+				imgcolor = color.value;
+
+				let animanlsJSON = {
+					name: animalname, 
+					width: imgwidth, 
+					height: imgheight,
+					color: imgcolor
+				};
+
+				let response = await fetch('./api/muggers', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(animanlsJSON)
+				});
+				const json = await response.json();
+				console.log(json);
+				if (json.error != null)
+				{
+					var pjson = JSON.stringify(json);
+           			document.write(pjson);
+				}
+				else
+				{
+					document.write('<img id=myImg src= "">');
+					var img = json.image;
+					document.getElementById("myImg").src = "images/"+img+".jpg";
+					delete json._id;
+					delete json.__v;
+					var pjson = JSON.stringify(json);
+           			document.write(pjson);
+				}
+			}
+
+		</script>
+	</head>
+	
+	<body>
+		<a>Animal Name</a><br>
+		<select id="animal">
+			<option>verblyud</option>
+			<option>vol</option>
+			<option>volk</option>
+		</select><p>
+		<a>Width</a><br>
+		<input id="width" rows="1" cols="10"></input><p>
+		<a>Height</a><br>
+		<input id="height" rows="1" cols="10"></input><p>
+		<a>Color</a><br>
+		<input id="color" rows="1" cols="10"></input><p>
+		<input type="submit" value="Submit text" onclick="check()"/>
+	</body>
+	
+</html>
